@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			var evalRPN = function (tokens) {
+				let pre = 0;
+				let stack = [];
+				let num1 = 0;
+				let num2 = 0;
+				for (let i = 0; i < tokens.length; i++) {
+					let item = tokens[i];
+					switch (item) {
+						case "+":
+							num1 = stack.pop();
+							num2 = stack.pop();
+							pre = Number(num1) + Number(num2);
+							stack.push(pre);
+							break;
+						case "*":
+							num1 = stack.pop();
+							num2 = stack.pop();
+							pre = Number(num1) * Number(num2);
+							stack.push(pre);
+							break;
+						case "-":
+							num1 = stack.pop();
+							num2 = stack.pop();
+							pre = Number(num2) - Number(num1);
+							stack.push(pre);
+							break;
+						case "/":
+							num1 = stack.pop();
+							num2 = stack.pop();
+							pre = Math.trunc(Number(num2) / Number(num1));
+							stack.push(pre);
+							break;
+						default:
+							stack.push(item);
+							break;
+					}
+				}
+				return stack[0];
+			};
+		</script>
+	</body>
+</html>

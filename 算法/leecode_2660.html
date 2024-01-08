@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			var isWinner = function (player1, player2) {
+				let score1 = 0;
+				let score2 = 0;
+
+				for (let i = 0; i < player1.length; i++) {
+					if (
+						(player1[i - 1] && player1[i - 1] === 10) ||
+						(player1[i - 2] && player1[i - 2] === 10)
+					) {
+						score1 += player1[i] * 2;
+					} else {
+						score1 += player1[i];
+					}
+					if (
+						(player2[i - 1] && player2[i - 1] === 10) ||
+						(player2[i - 2] && player2[i - 2] === 10)
+					) {
+						score2 += player2[i] * 2;
+					} else {
+						score2 += player2[i];
+					}
+				}
+
+				if (score1 === score2) return 0;
+				return score1 > score2 ? 1 : 2;
+			};
+		</script>
+	</body>
+</html>

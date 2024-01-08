@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			var countSubstrings = function (s) {
+				let count = 0;
+				for (let i = 0; i < s.length; i++) {
+					let s1 = "",
+						s2 = "";
+					for (let j = i; j < s.length; j++) {
+						(s1 += s[j]), (s2 = s[j] + s2);
+						if (s1 === s2) count++;
+					}
+				}
+
+				return count;
+			};
+			countSubstrings("abac");
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			var reverseStr = function (s, k) {
+				let res = "";
+				if (s.length === 1) return s;
+				for (let i = 0; i < s.length - 1; i = i + k * 2) {
+					const count = s.length - i;
+					if (count >= k * 2) {
+						for (let j = i + k - 1; j >= i; j--) {
+							res += s[j];
+						}
+						for (let j = i + k; j < i + k * 2; j++) {
+							res += s[j];
+						}
+					} else {
+						s = s.slice(i);
+					}
+				}
+				if (s.length < k) {
+					for (let i = s.length - 1; i >= 0; i--) {
+						res += s[i];
+					}
+				}
+				if (s.length >= k && s.length < k * 2) {
+					for (let j = k - 1; j >= 0; j--) {
+						res += s[j];
+					}
+					for (let j = k; j < s.length; j++) {
+						res += s[j];
+					}
+				}
+				return res;
+			};
+            console.log(reverseStr("abcdefg",1));
+		</script>
+	</body>
+</html>

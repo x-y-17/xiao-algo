@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			var canJump = function (nums) {
+				let max = 0;
+				if (nums.length === 1) return true;
+				for (let i = 0; nums[i] !== 0 && i < nums.length; ) {
+					if (nums[i] + i >= nums.length - 1) {
+						return true;
+					}
+					let count = nums[i];
+					let step = 1;
+					while (count) {
+						if (nums[i + step] >= nums[i]) {
+							break;
+						}
+						step++;
+						count--;
+					}
+					i += step ? step : 1;
+				}
+				return false;
+			};
+			canJump([3, 0, 8, 2, 0, 0, 1]);
+		</script>
+	</body>
+</html>

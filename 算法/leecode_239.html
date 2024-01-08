@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			// var maxSlidingWindow = function (nums, k) {
+			// 	class MonoQueue {
+			// 		queue;
+			// 		constructor() {
+			// 			this.queue = [];
+			// 		}
+			// 		enqueue(value) {
+			// 			let back = this.queue[this.queue.length - 1];
+			// 			while (back !== undefined && back < value) {
+			// 				this.queue.pop();
+			// 				back = this.queue[this.queue.length - 1];
+			// 			}
+			// 			this.queue.push(value);
+			// 		}
+			// 		dequeue(value) {
+			// 			let front = this.front();
+			// 			if (front === value) {
+			// 				this.queue.shift();
+			// 			}
+			// 		}
+			// 		front() {
+			// 			return this.queue[0];
+			// 		}
+			// 	}
+			// 	let helperQueue = new MonoQueue();
+			// 	let i = 0,
+			// 		j = 0;
+			// 	let resArr = [];
+			// 	while (j < k) {
+			// 		helperQueue.enqueue(nums[j++]);
+			// 	}
+			//     console.log(j)
+			// 	resArr.push(helperQueue.front());
+			// 	while (j < nums.length) {
+			// 		helperQueue.enqueue(nums[j]);
+			// 		helperQueue.dequeue(nums[i]);
+			// 		resArr.push(helperQueue.front());
+			// 		i++, j++;
+			// 	}
+			// 	return resArr;
+			// };
+			var maxSlidingWindow = function (nums, k) {
+				if (k === 1) return nums;
+				let result = [];
+				const helperQueue = new MQ();
+				let i = 0,
+					j = 0;
+				let resArr = [];
+				while (j < k) {
+					helperQueue.enqueue(nums[j++]);
+				}
+				result.push(helperQueue.getMaxValue());
+				while (j < nums.length) {
+					helperQueue.enqueue(nums[j]);
+					helperQueue.dequeue(nums[i]);
+					resArr.push(helperQueue.getMaxValue());
+					i++, j++;
+				}
+				return result;
+			};
+
+			class MQ {
+				constructor() {
+					this.queue = [];
+				}
+
+				dequeue(val) {
+					if (this.queue.length > 0 && val === this.queue[0]) {
+						this.queue.shift();
+					}
+				}
+				enqueue(val) {
+					while (
+						this.queue.length > 0 &&
+						val > this.queue[this.queue.length - 1]
+					) {
+						this.queue.pop();
+					}
+					this.queue.push(val);
+				}
+				getMaxValue() {
+					return this.queue[0];
+				}
+			}
+			maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3);
+		</script>
+	</body>
+</html>

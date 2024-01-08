@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			/**
+			 * @param {number} target
+			 * @param {number[]} nums
+			 * @return {number}
+			 */
+			var minSubArrayLen = function (target, nums) {
+				let res = nums[0] === target ? 1 : 0;
+				let sum = nums[0];
+                let flag = false;
+				let left = 0,
+					right = left + 1;
+				while (left <= right && right < nums.length) {
+					sum = sum + nums[right];
+					if (sum >= target) {
+						res = flag ? Math.min(right - left + 1,res) : right - left + 1;
+                        flag = true;
+						sum -= nums[left];
+						sum -= nums[right];
+						left++;
+						continue;
+					}
+					if (sum < target) {
+						right++;
+						continue;
+					}
+				}
+				return flag ? res : 0;
+			};
+
+			console.log(minSubArrayLen(15,[5,1,3,5,10,7,4,9,2,8]));
+		</script>
+	</body>
+</html>
